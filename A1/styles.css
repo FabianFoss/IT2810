@@ -1,0 +1,42 @@
+body {
+    background-color:lightblue;
+}
+
+#svgcontain {
+    background-color: chartreuse;
+}
+
+#htmlcontain {
+    background-color:chocolate;
+}
+
+#container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 500px;
+    background-color: lightpink;
+}
+
+.center {
+    text-align: center;
+    background-color: lightcoral;
+}
+
+.containdim {
+    width: auto;
+    height: auto;
+}
+
+.widediv {
+    width: 100%;
+}
+
+h1 {
+    color: white;
+}
+
+img {
+    height: auto;
+}
