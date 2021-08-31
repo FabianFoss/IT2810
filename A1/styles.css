@@ -15,7 +15,7 @@ body {
     justify-content: space-around;
     align-items: center;
     width: 100%;
-    height: 500px;
+    height: auto;
     background-color: lightpink;
 }
 
@@ -24,7 +24,7 @@ body {
     background-color: lightcoral;
 }
 
-.containdim {
+.content {
     width: auto;
     height: auto;
 }
