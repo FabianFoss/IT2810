@@ -1,13 +1,5 @@
 body {
-    background-color:lightblue;
-}
-
-#svgcontain {
-    background-color: chartreuse;
-}
-
-#htmlcontain {
-    background-color:chocolate;
+    background-color:#F8F8FB;
 }
 
 #container {
@@ -16,17 +8,22 @@ body {
     align-items: center;
     width: 100%;
     height: auto;
-    background-color: lightpink;
+    flex-wrap: wrap;
+    margin-top: 20px;
 }
 
 .center {
     text-align: center;
-    background-color: lightcoral;
 }
 
 .content {
-    width: auto;
-    height: auto;
+    width: 500px;
+    height: 500px;
+    background-color: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
 .widediv {
@@ -34,9 +31,55 @@ body {
 }
 
 h1 {
-    color: white;
+    color: black;
 }
 
 img {
     height: auto;
+}
+
+.wrapper {
+    width: 100%;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#doc {
+    margin-top: 10px;
+}
+
+button {
+    padding: 10px;
+    min-width: 120px;
+    size: 20px;
+}
+
+.code {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.codeexplain {
+    padding:5px;
+    border-radius: 5px;
+    width: 20%;
+    overflow:scroll;
+    background-color: #F8F8FB;
+}
+
+.info {
+   margin: 10px;
+   padding: 5px 20px;
+   background-color: #bdd2b3;
+   border-radius: 10px;
+   box-shadow: 3px 5px gray;
+}
+
+.textalign {
+    text-align: center;
 }

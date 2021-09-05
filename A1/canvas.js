@@ -1,245 +1,161 @@
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
+let smokeHeight = 0
+let loops = 0
+let height = 0
+let smoke = true
 
-let x = 0;
-let y = 0;
-let bY=0;
-
-let fade = "#53354a"
+const move = () => {
+  smokeHeight += 1
+}
 
 const fillBackground = () => {
-  ctx.fillStyle = "#ffe2e2";
-  ctx.fillRect(0, 0, 500, 530);
+  ctx.fillStyle = "black";
+  ctx.fillRect(0, 0, 500, 500);
+}
+
+const fillSky = () => {
+  ctx.fillStyle = "lightblue";
+  ctx.fillRect(0, 0, 500, 350);
 }
 
 const fillGrass = () => {
-  ctx.fillStyle = "#2eb872";
-  ctx.fillRect(0, 480, 500, 20);
+    ctx.fillStyle = "#008000"
+    ctx.fillRect(0, 350, 500, 150)
 }
 
-const fillGrassFaded = () => {
-  ctx.fillStyle = fade;
-  ctx.fillRect(0, 480, 500, 20);
+const fillWall = (inverse) => {
+  ctx.fillStyle = inverse ? "beige" : "navy"
+  ctx.fillRect(75, 195-height, 350, 255)
+}
+const fillDoor = (inverse) => {
+  ctx.fillStyle = inverse ? "navy":"beige"
+  ctx.fillRect(305, 300-height, 90, 150)
 }
 
-const fillHouse = () => {
-  ctx.fillStyle = "#ffc0cb";
-  ctx.fillRect(150, 300, 200, 200);
-
+const fillPipe = (inverse) => {
+  ctx.fillStyle = inverse ? "grey" : "black"
+  ctx.fillRect(100, 80-height, 58, 100)
 }
 
-const fillHouseFaded = () => {
-  ctx.fillStyle = fade;
-  ctx.fillRect(150, 300, 200, 200);
-
-}
-
-const fillDoor = () => {
-  ctx.fillStyle = "#8d6262";
-  ctx.fillRect(220, 400, 60, 100);
-}
-
-const fillDoorFaded = () => {
-  ctx.fillStyle = fade;
-  ctx.fillRect(220, 400, 60, 100);
-}
-
-
-const fillPipe = () => {
-  ctx.fillStyle = "#ffc0cb";
-  ctx.fillRect(310, 180, 40, 80);
-}
-
-const fillPipeFaded = () => {
-  ctx.fillStyle = fade;
-  ctx.fillRect(310, 180, 40, 80);
-}
-
-const fillRoof = () => {
+const fillRoof = (inverse) => {
+  ctx.fillStyle = inverse ? "black" : 'grey';
   ctx.beginPath();
-  ctx.moveTo(250, 150);
-  ctx.lineTo(110, 300);
-  ctx.lineTo(390, 300);
-  ctx.fillStyle = "#8d6262";
-  ctx.fill();
+  ctx.moveTo(250, 120-height);
+  ctx.lineTo(20,200-height);
+  ctx.lineTo(470, 200-height);
   ctx.closePath();
+  ctx.fill();
 }
 
-const fillRoofFaded = () => {
+const fillSmoke = () => {
+  ctx.fillStyle = "gray"
   ctx.beginPath();
-  ctx.moveTo(250, 150);
-  ctx.lineTo(110, 300);
-  ctx.lineTo(390, 300);
-  ctx.fillStyle = fade;
+  ctx.arc(130, 120-smokeHeight, 20, 0, 2 * Math.PI);
   ctx.fill();
-  ctx.closePath();
+  ctx.strokeStyle = 'gray';
+  ctx.stroke();
 }
 
-const fillBoble3 = () => {
+const createLine = (x1, y1, x2, y2) => {
+  ctx.strokeStyle = "black"
   ctx.beginPath();
-  ctx.arc(380, 40, 52, 0, Math.PI * 2, true)
-  ctx.fillStyle = "white";
-  ctx.fill();
-  ctx.closePath();
+  ctx.moveTo(x1, y1);
+  ctx.lineTo(x2, y2);
+  ctx.stroke();
 }
 
-const fillBoble3Moving = () => {
+const createBallon = (fill, cx, cy, r) => {
+  ctx.fillStyle = fill
   ctx.beginPath();
-  ctx.arc(380, 40-bY, 52, 0, Math.PI * 2, true)
-  ctx.fillStyle = "white";
+  ctx.arc(cx, cy, r, 0, 2 * Math.PI);
   ctx.fill();
-  ctx.closePath();
+  ctx.strokeStyle = fill;
+  ctx.stroke();
 }
 
-
-const fillBoble3Faded = () => {
-  ctx.beginPath();
-  ctx.arc(380, 40, 52, 0, Math.PI * 2, true)
-  ctx.fillStyle = fade;
-  ctx.fill();
-  ctx.closePath();
+const fillBallons = () => {
+  ctx.fillStyle = "black"
+  ctx.fillRect(249, 60-height, 2, 70)
+  createBallon("blue", 250, 60-height, 20)
+  createBallon("red", 235, 75-height, 20)
+  createBallon("green", 265, 75-height, 20)
 }
 
-
-const fillBoble2 = () => {
-  ctx.beginPath();
-  ctx.arc(365, 117, 35, 0, Math.PI * 2, true)
-  ctx.fillStyle = "#dfd3d3";
-  ctx.fill();
-  ctx.closePath();
-}
-
-const fillBoble2Moving = () => {
-  ctx.beginPath();
-  ctx.arc(365, 117-bY, 35, 0, Math.PI * 2, true)
-  ctx.fillStyle = "#dfd3d3";
-  ctx.fill();
-  ctx.closePath();
-}
-
-
-
-
-
-const fillBoble2Faded = () => {
-  ctx.beginPath();
-  ctx.arc(365, 117, 35, 0, Math.PI * 2, true)
-  ctx.fillStyle = fade;
-  ctx.fill();
-  ctx.closePath();
-}
-
-
-
-const fillBoble1 = () => {
-  ctx.beginPath();
-  ctx.arc(330, 160, 20, 0, Math.PI * 2, true)
-  ctx.fillStyle = "grey";
-  ctx.fill();
-  ctx.closePath();
-}
-
-const fillBoble1Moving = () => {
-  ctx.beginPath();
-  ctx.arc(330, 160-bY, 20, 0, Math.PI * 2, true)
-  ctx.fillStyle = "grey";
-  ctx.fill();
-  ctx.closePath();
-}
-
-
-
-const fillBoble1Faded = () => {
-  ctx.beginPath();
-  ctx.arc(330, 160, 20, 0, Math.PI * 2, true)
-  ctx.fillStyle = fade;
-  ctx.fill();
-  ctx.closePath();
-}
-
-const update = () => {
-  bY += 1;
-}
-
-const gameLoop = () => {
-  if (bY==200){
-    bY=0;
-    draw();
-    return;
-  }
-  update();
-  drawBobbles();
-  window.requestAnimationFrame(gameLoop);
-}
-
-
-canvas.addEventListener('mousemove', e => {
-  ctx.clearRect(0, 0, 500, 530);
-  draw();
+canvas.addEventListener('click', e => {
   x = e.offsetX;
   y = e.offsetY;
-  //console.log(x, y)
 
-
-  if (((((150 < x) && (x < 220)) || ((280 < x) && (x < 350))) && ((300 < y) && (y < 500))) || ((220 < x) && (x < 280) && (300 < y) && (y < 400))) {
-    fillHouseFaded();
-    fillDoor();
-  } else if ((220 < x) && (x < 280) && (400 < y) && (500 > y)) {
-    fillDoorFaded();
-  } else if (((350 < x) || (x < 150)) && ((480 < y) && (y < 500))) {
-    fillGrassFaded();
-    fillHouse();
-    fillDoor();
+  if ((x > 100) && (x < 100+58) && (y > 80 && y < 180)) {
+    smokeLoop();
   }
-    else if (((188<x) && (x<300) && (214<y) && (y<300))){
-      fillRoofFaded();
-    }
-    else if ((311<x) && (x<350) && (180<y) && (y<220)){
-      fillPipeFaded();
-      fillRoof();
-    }
-    else if ((311<x) && (x<346) && (150<y) && (y<177)){
-      fillBoble1Faded();
-    }
-    else if ((336<x) && (x<388) && (91<y) && (y<139)){
-      fillBoble2Faded();
-    }
-    else if ((330<x) && (x<422) && (y<78)){
-      fillBoble3Faded();
-      fillBoble2();
-    }
-   else {
+
+  if ((x > 75) && (x < 75+350) && (y > 195 && y < 195+255)) {
+    flyLoop()
+  }
+})
+
+canvas.addEventListener('mousemove', e => {
+  x = e.offsetX;
+  y = e.offsetY;
+
+  let wallXmin = 75
+  let wallYmin = 195-height
+  let wallXmax = wallXmin + 350
+  let wallYmax = wallYmin + 255
+
+  let wall = (x > wallXmin) && (x < wallXmax) && ((y > wallYmin) && (y < wallYmax))
+  if (wall) {
+    inverse = true
+    ctx.clearRect(0, 0, 500, 500);
+    build();
+  } else {
+    inverse = false
     ctx.clearRect(0, 0, 500, 530);
-    draw();
+    build();
   }
+  
+})
 
-});
-$("canvas").click(gameLoop);
+const smokeLoop = () => {
+  if (smokeHeight==170){
+    smokeHeight=0;
+    build();
+    if (loops === 10) {
+      loops = 0
+      return
+    }
+    loops += 1
+  }
+  smokeHeight += 1
+  ctx.clearRect(0, 0, 500, 500);
+  build();
+  window.requestAnimationFrame(smokeLoop);
+}
 
+const flyLoop = () => {
+  if (height == 500) {
+    return
+  }
+  smoke = false
+  height += 1
+  ctx.clearRect(0,0,500,500)
+  build();
+  window.requestAnimationFrame(flyLoop)
 
-const drawBobbles = () => {
+}
+let inverse = false
+const build = () => {
   fillBackground();
+  fillSky()
   fillGrass();
-  fillHouse();
-  fillDoor();
-  fillPipe();
-  fillRoof();
-  fillBoble3Moving();
-  fillBoble2Moving();
-  fillBoble1Moving();
+  fillWall(inverse);
+  fillDoor(inverse);
+  if (smoke) fillSmoke(); 
+  fillBallons();
+  fillPipe(inverse);
+  fillRoof(inverse);
 }
 
-const draw = () => {
-  fillBackground();
-  //fillGrass();
-  fillHouse();
-  fillDoor();
-  fillPipe();
-  fillRoof();
-  fillBoble3();
-  fillBoble2();
-  fillBoble1();
-}
-
-draw();
+build();
